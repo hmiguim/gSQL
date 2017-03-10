@@ -2,23 +2,22 @@
 
 ### What is this repository for? ###
 
-* Energy meter for SQL queries developed in C++
-* v0.0.5
+* Energy meter for SQL queries developed in Java with [jRapl](http://kliu20.github.io/jRAPL/)
+* v0.1.0
 
 ## How do I get set up? ##
 
-### C++ Dependencies ###
-* [libpqxx](http://pqxx.org/development/libpqxx/)
-* [Boost C++ Library](http://www.boost.org/)
-* [Intel® Power Gadget API](https://software.intel.com/en-us/blogs/2012/12/13/using-the-intel-power-gadget-api-on-mac-os-x)
+### Java Dependencies ###
+* [jRapl](http://kliu20.github.io/jRAPL/)
+* [Neo4j Java Driver](https://github.com/neo4j/neo4j-java-driver)
+* [MySQL Connector Java](https://dev.mysql.com/downloads/connector/j/)
 
 ### Database setup ###
-* [TPC-H Gen](http://www.tpc.org/tpch/)
-* [PostgreSQL](www.postgresql.org/)
+* [AdventureWorksDW](https://github.com/hmiguim/AdventureWorksCycle)
 
 ### Usage ###
   * gSQL --help
 
 ## Who do I talk to? ##
 
-  * [Miguel Guimarães](mailto:hmtlguimaraes@gmail.com?subject=gSQL: Lorem Ipsum)
+  * [Miguel Guimarães](mailto:hmtlguimaraes@gmail.com?subject=gSQL)
