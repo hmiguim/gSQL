@@ -7,22 +7,17 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException, IOException, SQLException {
 
-        //String input = args[0];
-        //int executions = Integer.valueOf(args[1]);
-        //int repetitions = Integer.valueOf(args[2]);
+        String input = args[0];
+        int executions = Integer.valueOf(args[1]);
+        int repetitions = Integer.valueOf(args[2]);
 
-        //Meter m = new Meter(input, executions, repetitions);
+        Meter m = new Meter(input, executions, repetitions);
 
-        //m.startTest();
+        m.startTest(DBMS.MYSQL);
 
-        //m.results();
+        m.results();
 
-        //EnergyCheckUtils.dealloc();
+        EnergyCheckUtils.dealloc();
         
-        Adapter a = new Adapter("localhost", 7687, "", "neo4j", "que34almeida25");
-        
-        System.out.println(a.start_connection(DBMS.NEO4J));
-     
-        a.executeQuery(DBMS.NEO4J, "", null);
     }
 }

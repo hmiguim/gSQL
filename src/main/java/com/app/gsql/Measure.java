@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Measure {
 
-    private ArrayList<Double> energy;
-    private ArrayList<Double> power;
-    private ArrayList<Double> performance;
+    private final ArrayList<Double> energy;
+    private final ArrayList<Double> power;
+    private final ArrayList<Double> performance;
 
     public Measure() {
         this.energy = new ArrayList<>();

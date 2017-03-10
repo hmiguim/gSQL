@@ -13,7 +13,7 @@
 * [MySQL Connector Java](https://dev.mysql.com/downloads/connector/j/)
 
 ### Database setup ###
-* [AdventureWorksDW](https://github.com/hmiguim/AdventureWorksCycle)
+* [AdventureWorksDW - Neo4j](https://github.com/hmiguim/AdventureWorksCycle)
 
 ### Usage ###
   * gSQL --help

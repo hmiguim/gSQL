@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.GraphDatabase;
-import org.neo4j.driver.v1.Record;
 import org.neo4j.driver.v1.Session;
-import org.neo4j.driver.v1.StatementResult;
 import org.neo4j.driver.v1.Transaction;
 
 public class Adapter {
@@ -88,16 +86,9 @@ public class Adapter {
 
             case NEO4J:
                 try (Transaction t = session.beginTransaction()) {
-                    StatementResult result = t.run("MATCH(F:FactInternetSales)-[:ORDER_AT]->(D),(F:FactInternetSales)-[:PRODUCT]->(P)-[:SUBCATEGORY]->(S)-[:CATEGORY]->(C)\n"
-                            + "WHERE D.CalendarYear = 2014\n"
-                            + "RETURN C.EnglishProductCategoryName as Category, COUNT(F.SalesAmount) as Nr, SUM(F.SalesAmount) as Total\n"
-                            + "ORDER BY C.EnglishProductCategoryName ASC;");
-
-                    while (result.hasNext()) {
-                        Record record = result.next();
-                        System.out.println(record.get("Category").asString());
-                    }
+                    t.run(statment);
                 }
+                break;
         }
 
     }

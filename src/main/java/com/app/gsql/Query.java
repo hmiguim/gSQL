@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Query {
 
-    private String statment;
-    private ArrayList<String> opts;
+    private final String statment;
+    private final ArrayList<String> opts;
 
-    private Measure measures;
+    private final Measure measures;
     private Result energy_results;
     private Result power_results;
     private Result performance_results;

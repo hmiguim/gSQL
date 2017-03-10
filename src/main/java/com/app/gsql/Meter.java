@@ -80,66 +80,64 @@ public class Meter {
 
         FileWriter writer = new FileWriter(file, true);
 
-        PrintWriter out = new PrintWriter(writer);
-
-        out.println("line,joules_avg,joules_std,joules_min,joules_max,watts_avg,watts_std,watts_min,watts_max,time_avg,time_std,time_min,time_max");
-
-        for (Query q : this.queries) {
-
-            builder = new StringBuilder();
-            Measure m = q.getMeasures();
-
-            /**
-             * ************
-             *** Energy ***
-             **************
-             */
-            double e_avg = Calculus.average(m.getEnergyMeasurements());
-            double e_min = Calculus.min(m.getEnergyMeasurements());
-            double e_max = Calculus.max(m.getEnergyMeasurements());
-            double e_std = Calculus.std_deviation(m.getEnergyMeasurements(), e_avg);
-
-            /**
-             * ************
-             **** Power ****
-	     **************
-             */
-            double p_avg = Calculus.average(m.getPowerMeasurements());
-            double p_min = Calculus.min(m.getPowerMeasurements());
-            double p_max = Calculus.max(m.getPowerMeasurements());
-            double p_std = Calculus.std_deviation(m.getPowerMeasurements(), p_avg);
-
-            /**
-             * ******************
-             **** Performance ****
-	     ********************
-             */
-            double t_avg = Calculus.average(m.getPerformanceMeasurements());
-            double t_min = Calculus.min(m.getPerformanceMeasurements());
-            double t_max = Calculus.max(m.getPerformanceMeasurements());
-            double t_std = Calculus.std_deviation(m.getPerformanceMeasurements(), t_avg);
-
-            builder.append(q.getStatment()).append(",");
-
-            builder.append(e_avg).append(",")
-                    .append(e_std).append(",")
-                    .append(e_min).append(",")
-                    .append(e_max).append(",");
-
-            builder.append(p_avg).append(",")
-                    .append(p_std).append(",")
-                    .append(p_min).append(",")
-                    .append(p_max).append(",");
-
-            builder.append(t_avg).append(",")
-                    .append(t_std).append(",")
-                    .append(t_min).append(",")
-                    .append(t_max);
-
-            out.println(builder.toString());
+        try (PrintWriter out = new PrintWriter(writer)) {
+            out.println("line,joules_avg,joules_std,joules_min,joules_max,watts_avg,watts_std,watts_min,watts_max,time_avg,time_std,time_min,time_max");
+            
+            for (Query q : this.queries) {
+                
+                builder = new StringBuilder();
+                Measure m = q.getMeasures();
+                
+                /**
+                 * ************
+                 *** Energy ***
+                 **************
+                 */
+                double e_avg = Calculus.average(m.getEnergyMeasurements());
+                double e_min = Calculus.min(m.getEnergyMeasurements());
+                double e_max = Calculus.max(m.getEnergyMeasurements());
+                double e_std = Calculus.std_deviation(m.getEnergyMeasurements(), e_avg);
+                
+                /**
+                 * ************
+                 **** Power ****
+                 **************
+                 */
+                double p_avg = Calculus.average(m.getPowerMeasurements());
+                double p_min = Calculus.min(m.getPowerMeasurements());
+                double p_max = Calculus.max(m.getPowerMeasurements());
+                double p_std = Calculus.std_deviation(m.getPowerMeasurements(), p_avg);
+                
+                /**
+                 * ******************
+                 **** Performance ****
+                 ********************
+                 */
+                double t_avg = Calculus.average(m.getPerformanceMeasurements());
+                double t_min = Calculus.min(m.getPerformanceMeasurements());
+                double t_max = Calculus.max(m.getPerformanceMeasurements());
+                double t_std = Calculus.std_deviation(m.getPerformanceMeasurements(), t_avg);
+                
+                builder.append(q.getStatment()).append(",");
+                
+                builder.append(e_avg).append(",")
+                        .append(e_std).append(",")
+                        .append(e_min).append(",")
+                        .append(e_max).append(",");
+                
+                builder.append(p_avg).append(",")
+                        .append(p_std).append(",")
+                        .append(p_min).append(",")
+                        .append(p_max).append(",");
+                
+                builder.append(t_avg).append(",")
+                        .append(t_std).append(",")
+                        .append(t_min).append(",")
+                        .append(t_max);
+                
+                out.println(builder.toString());
+            }
         }
-
-        out.close();
     }
 
     private double getEnergy() {
