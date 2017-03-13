@@ -70,6 +70,10 @@ public class EnergyCheckUtils {
         }
     }
 
+    public static int init() {
+        return ProfileInit();
+    }
+    
     public static void dealloc() {
         ProfileDealloc();
     }

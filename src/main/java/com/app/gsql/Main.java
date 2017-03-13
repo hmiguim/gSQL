@@ -25,6 +25,8 @@ public class Main {
                 .setPassword(readDatabaseConfiguration.getPassword())
                 .build(readDatabaseConfiguration.getDBMS());
         
+        EnergyCheckUtils.ProfileInit();
+        
         MeasureTool m = new MeasureTool(input, executions, repetitions, adapter);
         
         m.startTest();
