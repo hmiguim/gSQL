@@ -1,8 +1,8 @@
-package com.app.gsql;
+package com.app.statistics;
 
 import java.util.ArrayList;
 
-public class Calculus {
+public class StatisticsUtil {
 
     public static double min(ArrayList<Double> values) {
         double min = values.get(0);
@@ -30,7 +30,7 @@ public class Calculus {
 
     public static double average(ArrayList<Double> values) {
         double avg = 0;
-
+        
         for (double v : values) {
             if (v >= 0) {
                 avg += v;

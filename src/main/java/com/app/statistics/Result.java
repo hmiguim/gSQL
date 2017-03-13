@@ -1,4 +1,4 @@
-package com.app.gsql;
+package com.app.statistics;
 
 public class Result {
 

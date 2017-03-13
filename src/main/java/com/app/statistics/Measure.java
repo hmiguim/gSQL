@@ -1,4 +1,4 @@
-package com.app.gsql;
+package com.app.statistics;
 
 import java.util.ArrayList;
 
@@ -15,11 +15,9 @@ public class Measure {
     }
 
     public void add(double energy, double power, double time) {
-
         this.energy.add(energy);
         this.power.add(power);
         this.performance.add(time);
-
     }
 
     public ArrayList<Double> getEnergyMeasurements() {
