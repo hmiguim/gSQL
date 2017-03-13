@@ -43,29 +43,29 @@ public class MeasureTool {
 
                     this.adapter.setOptions(q.getOptions());
                     
-                    //double start = this.getEnergy();
+                    double start = this.getEnergy();
                     Date start_timestamp = new Date();
 
                     // DO A QUERY
                     this.adapter.executeQuery(q.getQuery());
 
-                    //double stop = this.getEnergy();
+                    double stop = this.getEnergy();
                     Date stop_timestamp = new Date();
                     
                     long performance = stop_timestamp.getTime() - start_timestamp.getTime();
                     
                     double time = (double) ((double) performance / (double) 1000);
                     
-                    //double energy = stop - start;
+                    double energy = stop - start;
 
-                    //double power = energy / (double) performance;
+                    double power = energy / (double) performance;
                     //double weight = idle_power * (double) performance;
                     
                     //energy -= weight;
                     //power -= idle_power;
-                    //if (energy > 0) {
-                        q.addMeasure(0, 0, time);
-                    //}
+                    if (energy > 0) {
+                        q.addMeasure(energy, power, time);
+                    }
                 }
             }
         });
@@ -75,16 +75,12 @@ public class MeasureTool {
     }
     
     public void results() {
-        
-        WriterUtil writer = new WriterUtil();
-        
+        WriterUtil writer = new WriterUtil();     
         writer.setQueries(this.queries);
-        
         writer.write(this.input);
     }
 
-   
-    /*private double getEnergy() {
+    private double getEnergy() {
         double[] energyStats = EnergyCheckUtils.getEnergyStats();
         return energyStats[0] + energyStats[1];
     }
@@ -96,5 +92,5 @@ public class MeasureTool {
         double end = this.getEnergy();
 
         return end - start;
-    }*/
+    }
 }

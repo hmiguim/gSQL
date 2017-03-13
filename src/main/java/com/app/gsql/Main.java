@@ -3,6 +3,7 @@ package com.app.gsql;
 import com.app.adapters.Adapter;
 import com.app.adapters.AdapterBuilder;
 import com.app.adapters.Config;
+import com.app.instruments.EnergyCheckUtils;
 import com.app.instruments.MeasureTool;
 import com.app.io.ParserUtil;
 
@@ -28,10 +29,8 @@ public class Main {
         
         m.startTest();
 
-       
         m.results();
-        //EnergyCheckUtils.dealloc();
-          
         
+        EnergyCheckUtils.dealloc();
     }
 }
