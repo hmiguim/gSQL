@@ -13,8 +13,8 @@ public class Main {
 
         String config = args[0];                    // ARG0 - database configuration file
         String input = args[1];                     // ARG1 - Test file
-        int executions = Integer.valueOf(args[1]);  // ARG2 - Number of executions
-        int repetitions = Integer.valueOf(args[2]); // ARG3 - Number of repetitions
+        int executions = Integer.valueOf(args[2]);  // ARG2 - Number of executions
+        int repetitions = Integer.valueOf(args[3]); // ARG3 - Number of repetitions
         
         Config readDatabaseConfiguration = ParserUtil.readDatabaseConfiguration(config);
         
@@ -25,7 +25,6 @@ public class Main {
                 .setPassword(readDatabaseConfiguration.getPassword())
                 .build(readDatabaseConfiguration.getDBMS());
         
-        EnergyCheckUtils.ProfileInit();
         
         MeasureTool m = new MeasureTool(input, executions, repetitions, adapter);
         

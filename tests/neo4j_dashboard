@@ -1,0 +1,69 @@
+-- Cypher 01
+-- Sales P/Year 2012
+--
+Q1 | MATCH(F:FactInternetSales)-[:ORDER_AT]->(D) WHERE D.CalendarYear = 2012 RETURN D.CalendarYear as Year, SUM(F.SalesAmount) as TotalSales
+
+-- Cypher 02
+-- Sales P/Year 2013
+--
+Q2 | MATCH(F:FactInternetSales)-[:ORDER_AT]->(D) WHERE D.CalendarYear = 2013 RETURN D.CalendarYear as Year, SUM(F.SalesAmount) as TotalSales;
+
+-- Cypher 03
+-- Sales Variance P/Year 2013 vs 2012
+--
+Q3 | MATCH(F:FactInternetSales)-[:ORDER_AT]->(D) WHERE D.CalendarYear = 2012 WITH SUM(F.SalesAmount) as v1 MATCH(F:FactInternetSales)-[:ORDER_AT]->(D) WHERE D.CalendarYear = 2013 RETURN SUM(F.SalesAmount)/v1;
+
+-- Cypher 04
+-- Sales P/Category in 2013
+--
+Q4 | MATCH(F:FactInternetSales)-[:ORDER_AT]->(D),(F:FactInternetSales)-[:PRODUCT]->(P)-[:SUBCATEGORY]->(S)-[:CATEGORY]->(C) WHERE D.CalendarYear = 2013 RETURN C.EnglishProductCategoryName as Category, COUNT(F.SalesAmount) as Nr, SUM(F.SalesAmount) as Total ORDER BY C.EnglishProductCategoryName ASC;
+
+-- Cypher 05
+-- Sales P/Region in 2013
+--
+Q5 | MATCH(F:FactInternetSales)-[:ORDER_AT]->(D) WHERE D.CalendarYear = 2013 WITH F MATCH (F)-[:TERRITORY]->(S) RETURN S.SalesTerritoryRegion as Region, COUNT(F.SalesAmount) as Nr, SUM(F.SalesAmount) as Total ORDER BY S.SalesTerritoryRegion ASC;
+
+-- Cypher 06
+-- Sales P/Week 2012
+--
+Q6 | MATCH(F:FactInternetSales)-[:ORDER_AT]->(D) WHERE D.CalendarYear = 2012 RETURN D.WeekNumberOfYear as Week, SUM(F.SalesAmount) as TotalSales ORDER BY Week ASC
+
+-- Cypher 07
+-- Sales P/Week 2013
+--
+Q7 | MATCH(F:FactInternetSales)-[:ORDER_AT]->(D) WHERE D.CalendarYear = 2013 RETURN D.WeekNumberOfYear as Week, SUM(F.SalesAmount) as TotalSales ORDER BY Week ASC
+
+-- Cypher 08
+-- Sales Variance P/Week 2012 vs 2013
+--
+Q8 | MATCH(F:FactInternetSales)-[:ORDER_AT]->(D) WHERE D.CalendarYear = 2013 AND D.WeekNumberOfYear = 23 WITH SUM(F.SalesAmount) as v1 MATCH(F:FactInternetSales)-[:ORDER_AT]->(D) WHERE D.CalendarYear = 2012 AND D.WeekNumberOfYear = 23 RETURN SUM(F.SalesAmount)/v1 as WeekSalesVariance;
+
+-- Cypher 09
+-- Sales Evolution P/Year 2013 vs 2012, by Week
+--
+Q9 | MATCH(F:FactInternetSales)-[:ORDER_AT]->(D) WHERE D.CalendarYear = 2013 RETURN D.WeekNumberOfYear AS Week, D.CalendarYear as Year, SUM(F.SalesAmount) as TotalWeek ORDER BY Week ASC UNION MATCH(F:FactInternetSales)-[:ORDER_AT]->(D) WHERE D.CalendarYear = 2012 RETURN D.WeekNumberOfYear AS Week, D.CalendarYear as Year, SUM(F.SalesAmount) as TotalWeek ORDER BY Week ASC
+
+-- Cypher 10
+-- Top 5 Customers, 2013
+--
+Q10 | MATCH (F:FactInternetSales)-[:ORDER_AT]->(D),(F:FactInternetSales)-[:CUSTOMER]->(C) WHERE D.CalendarYear = 2013 RETURN C.FullName AS Customer, SUM(F.SalesAmount) as TotalSales ORDER BY TotalSales DESC LIMIT 5
+
+-- Cypher 11
+-- Number of Sales, 2013
+--
+Q11 | MATCH (F:FactInternetSales)-[:ORDER]->(D) WHERE D.CalendarYear = 2013 RETURN COUNT(DISTINCT F.SalesOrderNumber) as NrSales
+
+-- Cypher 12
+-- Number of Distinct Customers in Sales, 2013
+--
+Q12 | MATCH (F:FactInternetSales)-[:ORDER_AT]->(D) WHERE D.CalendarYear = 2013 RETURN COUNT(DISTINCT F.CustomerKey) as NrSales
+
+-- Cypher 13
+-- Number of Distinct Products Sold, 2013
+--
+Q13 | MATCH (F:FactInternetSales)-[:ORDER_AT]->(D) WHERE D.CalendarYear = 2013 RETURN COUNT(DISTINCT F.ProductKey) as NrSales
+
+-- Cypher 14
+-- Top 5 Products, 2013
+--
+Q14 | MATCH (F:FactInternetSales)-[:ORDER_AT]->(D), (F:FactInternetSales)-[:PRODUCT]->(P) WHERE D.CalendarYear = 2013 RETURN P.EnglishProductName as Product, SUM(F.SalesAmount) as TotalSales ORDER BY TotalSales DESC LIMIT 5

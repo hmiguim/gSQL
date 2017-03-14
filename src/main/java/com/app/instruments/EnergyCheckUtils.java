@@ -21,7 +21,7 @@ public class EnergyCheckUtils {
     public static int socketNum;
 
     static {
-        System.setProperty("java.library.path", System.getProperty("user.dir"));
+        //System.setProperty("java.library.path", System.getProperty("user.dir"));
         try {
             Field fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths");
             fieldSysPath.setAccessible(true);
